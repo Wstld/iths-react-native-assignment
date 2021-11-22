@@ -1,4 +1,7 @@
+import { IProduct } from "../data_models/product";
+
 export type RootStackParams = {
     Login: undefined;
-    Home: {userId:string};
+    Home: undefined;
+    Product: { product:IProduct|undefined};
 }

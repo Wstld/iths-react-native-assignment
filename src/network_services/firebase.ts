@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { firebaseConfig } from '../config/firebase_config';
-import { getFirestore, setDoc, doc, getDoc, onSnapshot } from 'firebase/firestore';
+import { getFirestore, setDoc, doc as Doc, onSnapshot, deleteField,updateDoc} from 'firebase/firestore';
 import {
     getAuth,
     onAuthStateChanged,
@@ -8,23 +8,46 @@ import {
     signOut,
     createUserWithEmailAndPassword,
   } from 'firebase/auth';
-import { async } from '@firebase/util';
+
 import { IUser } from '../data_models/user';
+import { IProduct, ProductType } from '../data_models/product';
 
 initializeApp(firebaseConfig);
 const firestore = getFirestore();
 const auth = getAuth();
 
-export const setDocListner = async (userId:string,document:string) => {
-    onSnapshot(doc(firestore,userId,document), doc => {
-        console.log(doc.data())
-    }, err => console.log(err.message));
-}
+export const setCollectionListner = (userId:string, callback:(prodArr:Array<IProduct>) => void ) => {
+    onSnapshot(Doc(firestore,userId,'products'), doc => {
+     if(doc.exists()){
+         const data = doc.data();
+         const arr:Array<IProduct> = [];
+        if (data !== null){
+            Object.entries(data).forEach( (el) => {
+               let prod:IProduct = el[1];
+               arr.push(prod);
+            }); 
+        }
+        callback(arr);
+      
+     }else{
+        setDoc(Doc(firestore,userId,'products'),{}).then( () => setCollectionListner(userId,callback));
+     }
+    }, err => { 
+        console.log(`ERORR_SNAP_COLLECTION: ${err}`);
+    })
+};
+
+export const FBaddProduct = (userId:string,prodId:string,name:string,price:number,type:ProductType) => updateDoc(Doc(firestore,userId,'products',),{ [prodId]:{id:prodId,name:name,price:price,type:type}})
+export const FBremoveProduct = (userId:string,prodId:string) => {
+ updateDoc(Doc(firestore,userId,'products'),{ [prodId]:deleteField()} )
+}; 
+
+
 export const FBlogin = async (userName:string, password:string) => {
     await signInWithEmailAndPassword(auth,userName,password).then( userCredetial => { console.log(userCredetial)}, err => console.log(err))
 }
 
-export const setAuthListner = async (callback:(user:IUser) => void) =>{
+export const setAuthListner = async (callback:(user:IUser|null) => void) =>{
     onAuthStateChanged(auth, user => {  if(user != null) {
         const loggedInUser:IUser = {
             email:user.email != null? user.email: '', 
@@ -32,7 +55,9 @@ export const setAuthListner = async (callback:(user:IUser) => void) =>{
             name: user.displayName
         } 
         callback(loggedInUser);
-    } 
+    } else{
+        callback(null);
+    }
 
 }, err => console.log(err.message));
 
