@@ -8,6 +8,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import LoginScreen from './src/ui/login_screen';
 import HomeScreen from './src/ui/home_screen';
 import { AuthCtx, AuthProvider } from './src/context/login_ctx';
+import { ProductScreen } from './src/ui/product_screen';
+
 
 export default function App(){
   return <SafeAreaProvider>
@@ -27,6 +29,7 @@ export const AppNav:React.FC = () =>{
           authContext?.user != null ?     
           <Stack.Navigator initialRouteName = 'Home'>
           <Stack.Screen name = 'Home' component= {HomeScreen}/>
+          <Stack.Screen name = 'Product' component= {ProductScreen} initialParams={{product:undefined}}/>
           </Stack.Navigator>
           :
           <Stack.Navigator initialRouteName = 'Login'>
