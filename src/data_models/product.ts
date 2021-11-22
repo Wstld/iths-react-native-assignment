@@ -1,7 +1,9 @@
-enum productType{ Intergrated = 'Intergrated', Peripheral = 'Peripheral'};
+export enum ProductType{ Intergrated = 'Intergrated', Peripheral = 'Peripheral'};
 
 export interface IProduct{
     name:string,
     price:number,
-    type:productType,
+    type:string,
+    id:string,
 };
+
