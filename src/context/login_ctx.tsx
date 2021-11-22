@@ -20,9 +20,9 @@ export const AuthCtx = React.createContext<IAuthCtx|undefined>(undefined);
 export const AuthProvider:React.FC = ({children}) =>{
    const [user, setUser] = useState<IUser|null>(null);
     useEffect(() => {
-        setAuthListner((user:IUser) => { setUser(user)})
+        setAuthListner((user:IUser|null) => { setUser(user)})
         return () => {
-        setAuthListner((user:IUser) => { setUser(user)})
+        setAuthListner((user:IUser|null) => { setUser(user)})
         }
     }, [])
 

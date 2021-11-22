@@ -9,7 +9,7 @@ import LoginScreen from './src/ui/login_screen';
 import HomeScreen from './src/ui/home_screen';
 import { AuthCtx, AuthProvider } from './src/context/login_ctx';
 import { ProductScreen } from './src/ui/product_screen';
-
+import Icon from 'react-native-vector-icons/FontAwesome5';
 
 export default function App(){
   return <SafeAreaProvider>
@@ -23,12 +23,13 @@ export default function App(){
 export const AppNav:React.FC = () =>{
   const Stack = createNativeStackNavigator<RootStackParams>();
   const authContext = useContext( AuthCtx );
+  console.log(authContext?.user)
   return(
     <NavigationContainer>
         {
           authContext?.user != null ?     
           <Stack.Navigator initialRouteName = 'Home'>
-          <Stack.Screen name = 'Home' component= {HomeScreen}/>
+          <Stack.Screen name = 'Home' component= {HomeScreen} options={{headerRight: () => <Icon name='home' size={24} onPress={() => authContext.logout()}/>}}/>
           <Stack.Screen name = 'Product' component= {ProductScreen} initialParams={{product:undefined}}/>
           </Stack.Navigator>
           :

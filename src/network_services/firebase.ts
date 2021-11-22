@@ -47,7 +47,7 @@ export const FBlogin = async (userName:string, password:string) => {
     await signInWithEmailAndPassword(auth,userName,password).then( userCredetial => { console.log(userCredetial)}, err => console.log(err))
 }
 
-export const setAuthListner = async (callback:(user:IUser) => void) =>{
+export const setAuthListner = async (callback:(user:IUser|null) => void) =>{
     onAuthStateChanged(auth, user => {  if(user != null) {
         const loggedInUser:IUser = {
             email:user.email != null? user.email: '', 
@@ -55,7 +55,9 @@ export const setAuthListner = async (callback:(user:IUser) => void) =>{
             name: user.displayName
         } 
         callback(loggedInUser);
-    } 
+    } else{
+        callback(null);
+    }
 
 }, err => console.log(err.message));
 

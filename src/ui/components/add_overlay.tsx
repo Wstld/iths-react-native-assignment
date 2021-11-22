@@ -1,7 +1,7 @@
 import { arrayRemove } from "@firebase/firestore";
 import { Picker } from "@react-native-picker/picker";
 import React, { FC, useContext, useEffect, useState } from "react";
-import { Dimensions, View } from "react-native";
+import { Dimensions, PointPropType, View } from "react-native";
 import { Overlay , Input, Button,Text } from "react-native-elements";
 
 import Icon from 'react-native-vector-icons/FontAwesome5';
@@ -26,17 +26,19 @@ export const AddProductOverlay:FC<AddProductProps> = ({show,toggleVisibillity}) 
 
     const nameIsNotUsed = (name:string):boolean => {
         const find = prodContext?.products.find(val => val.name === name)
-        console.log(find);
        return find === undefined ? true : false 
     
     }
     
     useEffect(() => {
+        console.log('update')
         if(wrongPrice === false && price > 0 && name.length > 0 && nameIsNotUsed(name)){
        
             if(type === ProductType.Intergrated){
                 if(price >= 1000 && nameIsNotUsed(name)){
-                    setAddPossible(true)
+                    setAddPossible(true);
+                }else{
+                    setAddPossible(false);
                 }
             }else{
                 if(nameIsNotUsed(name)){
@@ -55,7 +57,7 @@ export const AddProductOverlay:FC<AddProductProps> = ({show,toggleVisibillity}) 
         <Text h1 style={{textAlign:'center',marginBottom:10}}>Add Product</Text>
         <View style={{height:Dimensions.get('window').height * 0.8,alignSelf:'center',width:Dimensions.get('window').width * 0.8,alignContent:'center'}}>
         <Input placeholder='Name' leftIcon = {<Icon name='tag' size={24}/>} onChangeText = {name => setName(name)}/>
-        <Input style={{marginBottom:0}} keyboardType='number-pad' placeholder='Price'  leftIcon = {<Icon name='coins' size={24}/>} onChangeText = {price => {
+        <Input style={{marginBottom:0}} keyboardType='number-pad' placeholder={price.toString()} value={price.toString()}  leftIcon = {<Icon name='coins' size={24}/>} onChangeText = {price => {
             //check type for price intervall
             const newPrice = parseInt(price);
             if(type === ProductType.Peripheral){
@@ -81,9 +83,6 @@ export const AddProductOverlay:FC<AddProductProps> = ({show,toggleVisibillity}) 
         style={{marginBottom:20}}
             selectedValue={type}
             onValueChange = {(item,index) => {
-                if(item === ProductType.Intergrated){
-                    setPrice(1000);
-                }
                 setType(item)
             }
             
