@@ -37,7 +37,7 @@ export const setCollectionListner = (userId:string, callback:(prodArr:Array<IPro
     })
 };
 
-export const FBaddProduct = (userId:string,prodId:string,name:string,price:number,type:ProductType) => setDoc(Doc(firestore,userId,'products',),{ prodId:{name:name,price:price,type:type}})
+export const FBaddProduct = (userId:string,prodId:string,name:string,price:number,type:ProductType) => updateDoc(Doc(firestore,userId,'products',),{ [prodId]:{id:prodId,name:name,price:price,type:type}})
 export const FBremoveProduct = (userId:string,prodId:string) => {
  updateDoc(Doc(firestore,userId,'products'),{ [prodId]:deleteField()} )
 }; 

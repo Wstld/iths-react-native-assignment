@@ -12,6 +12,7 @@ import { Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { RootStackParams } from './root_stack_params';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { AddProductOverlay } from './components/add_overlay';
 
 type HomeScreenPros = NativeStackScreenProps<RootStackParams,'Home'>
 
@@ -57,6 +58,12 @@ export const HomeScreenContent = ({route,navigation}:HomeScreenPros) => {
       </View>
     </Overlay>
 
+    <AddProductOverlay toggleVisibillity={() => toggleAddOverlay(!addOverlay)} show={addOverlay}/>
+
+
+
+   
+
     
     {prodContext?.products !== null? prodContext?.products.map((el,i) => (
       <ListItem.Swipeable
@@ -97,7 +104,7 @@ export const HomeScreenContent = ({route,navigation}:HomeScreenPros) => {
     )) :
     <> </>
     }
-    <FAB  icon={<Icon name='plus' size={14} color='white'/>} size='large' visible={true}/>
+    <FAB  icon={<Icon name='plus' size={14} color='white'/>} size='large' visible={true} onPress={ () => toggleAddOverlay(!addOverlay)}/>
   </View>)
 }
 
