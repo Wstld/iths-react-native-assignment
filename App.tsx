@@ -10,11 +10,14 @@ import HomeScreen from './src/ui/home_screen';
 import { AuthCtx, AuthProvider } from './src/context/login_ctx';
 import { ProductScreen } from './src/ui/product_screen';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import { ProductCtxProvider } from './src/context/home_ctx';
 
 export default function App(){
   return <SafeAreaProvider>
     <AuthProvider>
-      <AppNav/>
+      <ProductCtxProvider>
+        <AppNav/>
+      </ProductCtxProvider>
     </AuthProvider>
     </SafeAreaProvider>
  
