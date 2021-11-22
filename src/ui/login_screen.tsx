@@ -23,7 +23,7 @@ export default function LoginScreen():JSX.Element{
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
     const authContext = useContext(AuthCtx);
-    console.log(authContext?.user)
+    
 
   return <SafeAreaProvider>
     <ThemeProvider theme={theme}>

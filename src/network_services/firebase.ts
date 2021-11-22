@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { firebaseConfig } from '../config/firebase_config';
-import { getFirestore, setDoc, doc as Doc, onSnapshot, deleteDoc} from 'firebase/firestore';
+import { getFirestore, setDoc, doc as Doc, onSnapshot, deleteField,updateDoc} from 'firebase/firestore';
 import {
     getAuth,
     onAuthStateChanged,
@@ -38,7 +38,9 @@ export const setCollectionListner = (userId:string, callback:(prodArr:Array<IPro
 };
 
 export const FBaddProduct = (userId:string,prodId:string,name:string,price:number,type:ProductType) => setDoc(Doc(firestore,userId,'products',),{ prodId:{name:name,price:price,type:type}})
-export const FBremoveProduct = (userId:string,prodId:string) => deleteDoc(Doc(firestore,userId,prodId)); 
+export const FBremoveProduct = (userId:string,prodId:string) => {
+ updateDoc(Doc(firestore,userId,'products'),{ [prodId]:deleteField()} )
+}; 
 
 
 export const FBlogin = async (userName:string, password:string) => {

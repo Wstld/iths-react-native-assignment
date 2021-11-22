@@ -9,14 +9,14 @@ import { makeid } from "../util/helper_functions";
 interface IProductsCtx{
     products:Array<IProduct>;
     addProduct: (userId:string,name:string,price:number,type:ProductType) => void;
-    removeProduct: (userId:string,productId:string) => Promise<void>;
+    removeProduct: (userId:string,productId:string) => void;
 };
 
 export const ProductCtx = React.createContext<IProductsCtx|undefined>(undefined);
 
 export const ProductCtxProvider:React.FC = ({children}) =>{
     const authContext = useContext(AuthCtx);
-    const [products,setProducts] = useState(Array<IProduct>());
+    const [products,setProducts] = useState<Array<IProduct>>(Array<IProduct>());
     const addProduct = (userId:string,name:string, price:number,type:ProductType) => {
         let prodId = `${makeid(10)}_${name}`;
         FBaddProduct(userId,prodId,name,price,type);
@@ -29,6 +29,7 @@ export const ProductCtxProvider:React.FC = ({children}) =>{
         const listner = setCollectionListner(authContext.user!.id,(prodArr:Array<IProduct>) => {
            setProducts(prodArr);
         })
+        
         return () => {
             //remove listner on unmount.
             listner
