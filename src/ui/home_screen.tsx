@@ -48,15 +48,17 @@ export const HomeScreenContent = ({route,navigation}:HomeScreenPros) => {
           <Button title='Hell yes!' onPress={ () => { 
               if (authContext !== undefined && authContext.user !== null && prodContext !== undefined){
                 prodContext.removeProduct(authContext.user.id,selectedProduct.current);
+                toggleRemoveOverlay(!removeOverlay);
               }else{
                 //handle error.
               }
           }}/>
-          <Button title='Oh no!' onPress={ () => { toggleRemoveOverlay(false) }}/>
+          <Button title='Oh no!' onPress={ () => { toggleRemoveOverlay(!removeOverlay) }}/>
         </View>
       </View>
     </Overlay>
-
+    
+  
     <AddProductOverlay toggleVisibillity={() => toggleAddOverlay(!addOverlay)} show={addOverlay}/>
 
 
