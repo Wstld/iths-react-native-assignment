@@ -99,8 +99,8 @@ export const ProductScreen= ({route,navigation}:ProductScreenProps) => {
 
         <Button disabled={ !savePossible } title='Save' icon={<Icon name='save' size={30}/>} onPress={() => {
  
-            if(authContext !== undefined && authContext.user != null){
-                prodContext!.updateProduct(authContext.user.id,route.params.product!.id,name,price,type);
+            if(authContext !== undefined && authContext?.user != null){
+                prodContext!.updateProduct(authContext?.user.id,route.params.product!.id,name,price,type);
                 navigation.replace('Home');
             }
            

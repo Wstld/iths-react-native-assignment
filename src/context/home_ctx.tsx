@@ -26,7 +26,7 @@ export const ProductCtxProvider:React.FC = ({children}) =>{
     const updateProduct = (userId:string,prodId:string,name:string,price:number,type:ProductType) => FBupdateProduct(userId,prodId,name,price,type);
 
 
-    if(authContext !== undefined && authContext!.user!.id !== null){
+    if(authContext !== undefined && authContext?.user?.id !== null){
     useEffect(() => {
         const listner = setCollectionListner(authContext.user!.id,(prodArr:Array<IProduct>) => {
            setProducts(prodArr);

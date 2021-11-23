@@ -22,9 +22,11 @@ export default function HomeScreen({route,navigation}:HomeScreenPros):JSX.Elemen
 
   return <SafeAreaProvider>
     <ThemeProvider theme={theme}>
- 
+  
+
         <HomeScreenContent route={route} navigation={navigation}/>
-   
+
+    
     </ThemeProvider>
     </SafeAreaProvider>
 
