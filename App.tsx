@@ -1,5 +1,6 @@
 
 import React,{ useContext } from 'react';
+import { Dimensions, StyleSheet } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { RootStackParams } from './src/ui/root_stack_params';
@@ -47,4 +48,5 @@ export const AppNav:React.FC = () =>{
  
   )
 }
+
 

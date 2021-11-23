@@ -3,7 +3,7 @@ import { ImageSourcePropType, StyleSheet, View } from 'react-native';
 import { useEffect,useContext, useRef } from 'react';
 import { ThemeProvider,Text, Button, ListItem, FAB, Overlay,Image,Header } from 'react-native-elements';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import theme from './theme';
+import {theme} from './theme';
 import { ProductCtx, ProductCtxProvider } from '../context/home_ctx';
 import { AuthCtx } from '../context/login_ctx';
 
