@@ -1,11 +1,13 @@
-import { FormikHelpers, FormikErrors, Formik, ErrorMessage } from "formik";
+import {  Formik } from "formik";
 import React, { FC,useContext } from 'react';
-import { TextInput, View,Text, StyleSheet, Dimensions } from "react-native";
+import { View,Text, StyleSheet, Dimensions } from "react-native";
 import { Button, Input } from "react-native-elements";
 import * as Yup from 'yup'
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import { isEmpty } from "@firebase/util";
+import I18n from 'i18n-js';
+
 import { AuthCtx } from "../../context/login_ctx";
+import { stringPaths } from "../../config/lang";
 
 interface RegisterFormVal {
     username:string;
@@ -20,8 +22,8 @@ interface RegisterFormProps{
     const authContext = useContext(AuthCtx);
 
     const registerSchema = Yup.object().shape({
-        password: Yup.string().min(6,'Too Short').required('Required'),
-        username:Yup.string().email('Invalid email').required('Required')
+        password: Yup.string().min(6,I18n.t(stringPaths.login.registerForm.errorMsg.tooShort)).required(I18n.t(stringPaths.login.registerForm.errorMsg.required)),
+        username:Yup.string().email(I18n.t(stringPaths.login.registerForm.errorMsg.notValidEmail)).required(I18n.t(stringPaths.login.registerForm.errorMsg.required))
     });
 
 
@@ -41,14 +43,14 @@ interface RegisterFormProps{
       {({ handleChange, handleBlur, values, validateForm, errors}) => (
        
        <View style={styles.registerModal}>
-          <Input leftIcon = {<Icon name='user-tie' size={24}/>} onChangeText ={handleChange('username')} value={values.username} placeholder='email'/>
+          <Input leftIcon = {<Icon name='user-tie' size={24}/>} onChangeText ={handleChange('username')} value={values.username} placeholder={I18n.t(stringPaths.login.registerForm.email)}/>
           {errors.username != null ? <Text style={styles.errorMsg}>{errors.username}</Text> : <></>}
 
-          <Input leftIcon = {<Icon name='lock' size={24}/>} onChangeText ={handleChange('password')} value={values.password} placeholder='password'/>
+          <Input leftIcon = {<Icon name='lock' size={24}/>} onChangeText ={handleChange('password')} value={values.password} placeholder={I18n.t(stringPaths.login.registerForm.password)}/>
           {errors.username != null ? <Text style={styles.errorMsg}>{errors.password}</Text> : <></>}
 
-          <Button disabled={errors.password != null || errors.username != null || !values.password.length} type = 'solid' title = 'register' raised = {true} onPress = {() => submit(values)}/>   
-          <Button type = 'solid' title = 'close' raised = {true} onPress = {() => callback()}/>   
+          <Button disabled={errors.password != null || errors.username != null || !values.password.length} type = 'solid' title = {I18n.t(stringPaths.login.registerForm.addNewUser)} raised = {true} onPress = {() => submit(values)}/>   
+          <Button type = 'solid' title = {I18n.t(stringPaths.login.registerForm.close)} raised = {true} onPress = {() => callback()}/>   
         </View>
   
       )
