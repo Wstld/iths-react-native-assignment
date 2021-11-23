@@ -46,6 +46,7 @@ interface homeScreenLang {
             tooShort: string,
             needsMoreThanOneThousand: string,
             nameAlreadyExists: string,
+            needsLessThanTwoThousandSixHundred: string,
         },
     },
     updateForm: {
@@ -60,6 +61,7 @@ interface homeScreenLang {
             tooShort: string,
             needsMoreThanOneThousand: string,
             nameAlreadyExists: string,
+            needsLessThanTwoThousandSixHundred: string,
 
         },
     }
@@ -92,6 +94,7 @@ export const stringPaths: screenLang = {
                 tooShort: 'screens.home.addForm.errorMsg.tooShort',
                 needsMoreThanOneThousand: 'screens.home.addForm.errorMsg.needsMoreThanOneThousand',
                 nameAlreadyExists: 'screens.home.addForm.errorMsg.nameAlreadyExists',
+                needsLessThanTwoThousandSixHundred: 'screens.home.updateForm.errorMsg.needsLessThanTwoThousandSixHundred',
             },
         },
         updateForm: {
@@ -106,6 +109,7 @@ export const stringPaths: screenLang = {
                 tooShort: 'screens.home.updateForm.errorMsg.tooShort',
                 needsMoreThanOneThousand: 'screens.home.updateForm.errorMsg.needsMoreThanOneThousand',
                 nameAlreadyExists: 'screens.home.updateForm.errorMsg.nameAlreadyExists',
+                needsLessThanTwoThousandSixHundred: 'screens.home.updateForm.errorMsg.needsLessThanTwoThousandSixHundred',
             },
 
 
@@ -184,6 +188,7 @@ export const translations = {
                         tooShort: 'too short',
                         needsMoreThanOneThousand: 'must be over 1000',
                         nameAlreadyExists: 'name already used!',
+                        needsLessThanTwoThousandSixHundred: 'must be under 2600'
                     },
                 },
                 updateForm: {
@@ -198,6 +203,7 @@ export const translations = {
                         tooShort: 'too short',
                         needsMoreThanOneThousand: 'must be over 1000',
                         nameAlreadyExists: 'name already used!',
+                        needsLessThanTwoThousandSixHundred: 'must be under 2600',
                     },
 
 
@@ -256,6 +262,7 @@ export const translations = {
                         tooShort: 'för kort',
                         needsMoreThanOneThousand: 'måste vara över 1000',
                         nameAlreadyExists: 'namnet finns redan!',
+                        needsLessThanTwoThousandSixHundred: 'måste vara lägre än 2600'
                     },
                 },
                     updateForm: {
@@ -270,6 +277,7 @@ export const translations = {
                             tooShort: 'för kort',
                             needsMoreThanOneThousand: 'måste vara över 1000',
                             nameAlreadyExists: 'namnet finns redan!',
+                            needsLessThanTwoThousandSixHundred: 'måste vara lägre än 2600',
                         },
                     },
 

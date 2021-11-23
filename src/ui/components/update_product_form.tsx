@@ -46,10 +46,11 @@ interface ProductFormVal {
         }).required(I18n.t(stringPaths.home.updateForm.errorMsg.required)),
         price:Yup.number().required(stringPaths.home.updateForm.errorMsg.required).when('type',{
             is:ProductType.Intergrated,
-            then:Yup.number().min(1000,I18n.t(stringPaths.home.updateForm.errorMsg.needsMoreThanOneThousand))
+            then:Yup.number().min(1000,I18n.t(stringPaths.home.updateForm.errorMsg.needsMoreThanOneThousand)).max(2600,I18n.t(stringPaths.home.updateForm.errorMsg.needsLessThanTwoThousandSixHundred))
         }),
         type:Yup.string()
     });
+  
 
   
 
