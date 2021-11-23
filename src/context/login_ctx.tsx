@@ -5,11 +5,9 @@ import { FBlogin, FBlogout, FBregister, setAuthListner } from "../network_servic
 
 interface IAuthCtx{
     user:IUser|null,
-    register:(
+    registerAndLogin:(
         username: string,
         password: string,
-        firstName: string,
-        lastName: string,
     ) => Promise<void>;
     login: (username:string, password:string) => Promise<void>;
     logout: () => Promise<void>;
@@ -28,9 +26,9 @@ export const AuthProvider:React.FC = ({children}) =>{
 
    const login = FBlogin;
    const logout = FBlogout;
-   const register = FBregister;
+   const registerAndLogin = FBregister;
 
-    return (<AuthCtx.Provider value = {{user,register,login,logout}}>{children}</AuthCtx.Provider>)
+    return (<AuthCtx.Provider value = {{user,registerAndLogin,login,logout}}>{children}</AuthCtx.Provider>)
 
 }
 

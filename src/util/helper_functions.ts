@@ -1,3 +1,5 @@
+import * as Localization from "expo-localization";
+
 export function makeid(length:number):string {
     var result           = '';
     var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -8,3 +10,8 @@ export function makeid(length:number):string {
    }
    return result;
 }
+
+export const getLocale = () => {
+  
+return Localization.locale.slice(0, 2); 
+};
